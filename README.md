@@ -19,18 +19,15 @@
     - #### *Chat with users, search name.*
     - #### *Find friends: search name, filter user university, birthYear.*
 
-
 ## Inside directory create a .env file and add
 - `MONGO_URI=''`
 - `PORT=8080`
 - `JWT_SECRET='any-random-string'`
 - `CLIENT_URL=http://localhost:3000`
 
-
 ```bash
 npm install
 node app.js
 ```
-
 
 Open your browser and enter url `http://localhost:3000`
