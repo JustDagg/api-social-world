@@ -20,9 +20,9 @@
     - #### *Find friends: search, filter user.*
 
 ## Inside directory create a .env file and add
-- `MONGO_URI=your-mongodb-url`
+- `MONGO_URI=''`
 - `PORT=8080`
-- `JWT_SECRET=any-random-string-of-any-length`
+- `JWT_SECRET='any-random-string'`
 - `CLIENT_URL=http://localhost:3000`
 
 ```bash
