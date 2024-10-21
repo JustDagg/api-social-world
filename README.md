@@ -13,11 +13,12 @@
     - #### *Create / Edit / Delete posts.*
     - #### *Create / Delete post comments.*
     - #### *Like / Unlike posts.*
-    - #### *Create / Edit / Delete discussions.*
+    - #### *Create / Edit / Delete discussions, filter subject, date.*
     - #### *Like / Unlike discussions.*
-    - #### *Create / Delete notes.*
-    - #### *Chat with users, search user.*
-    - #### *Find friends: search, filter user.*
+    - #### *Create / Delete note, Show user note.*
+    - #### *Chat with users, search name.*
+    - #### *Find friends: search name, filter user university, birthYear.*
+
 
 ## Inside directory create a .env file and add
 - `MONGO_URI=''`
@@ -25,9 +26,11 @@
 - `JWT_SECRET='any-random-string'`
 - `CLIENT_URL=http://localhost:3000`
 
+
 ```bash
 npm install
 node app.js
 ```
+
 
 Open your browser and enter url `http://localhost:3000`
