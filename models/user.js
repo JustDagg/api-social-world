@@ -48,6 +48,22 @@ const userSchema = new mongoose.Schema({
         data: String,
         default: ""
     },
+    sex: {
+        type: String,
+        trim: true
+    },
+    nickname: {
+        type: String,
+        trim: true
+    },
+    workPlace: {
+        type: String,
+        trim: true
+    },
+    socialNetworkLink: {
+        type: String,
+        trim: true
+    },
     university: {
         type: String,
         trim: true
