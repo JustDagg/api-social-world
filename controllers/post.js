@@ -10,7 +10,7 @@ exports.postById = (req, res, next, id) => {
         .populate("postedBy", "_id name")
         .populate('comments.postedBy', '_id name')
         .populate('postedBy', '_id name')
-        .select('_id title body created likes comments photo')
+        .select('_id title field body created likes comments photo')
         .exec((err, post) => {
             if (err || !post) {
                 return res.status(400).json({
@@ -32,7 +32,7 @@ exports.getPosts = (req, res) => {
         .populate("postedBy", "_id name")
         .populate('comments', 'text created')
         .populate('comments.postedBy', '_id name')
-        .select("_id title body photo created likes")
+        .select("_id title field body photo created likes")
         .sort({ created: -1 })
         .then((posts) => {
             res.json(posts);
@@ -45,7 +45,7 @@ exports.getAllPostsRn = (req, res) => {
     const posts = Post.find()
         .populate('comments.postedBy', '_id name updated')
         .populate('postedBy', '_id name updated')
-        .select('_id title body created likes comments updated')
+        .select('_id title field body created likes comments updated')
         .sort({ created: -1 })
         .then((posts) => {
             res.json(posts);
@@ -101,6 +101,7 @@ exports.createPost = (req, res, next) => {
 exports.createPostRn = (req, res) => {
     let fields = {};
     fields.title = req.body.title;
+    fields.field = req.body.field;
     fields.body = req.body.body;
     let post = new Post(fields);
     console.log(fields);
@@ -141,7 +142,7 @@ exports.postsByUser = (req, res) => {
         .populate("postedBy", "_id name")
         .populate('comments.postedBy', '_id name')
         .populate('postedBy', '_id name')
-        .select('_id title body photo created likes comments updated')
+        .select('_id title field body photo created likes comments updated')
         .sort({ created: -1 })
         .exec((err, posts) => {
             if (err) {

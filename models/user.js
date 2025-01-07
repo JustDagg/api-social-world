@@ -68,6 +68,14 @@ const userSchema = new mongoose.Schema({
         type: String,
         trim: true
     },
+    major: {
+        type: String,
+        trim: true
+    },
+    specialization: {
+        type: String,
+        trim: true
+    },
     birthYear: {
         type: Number,
         min: 1900
