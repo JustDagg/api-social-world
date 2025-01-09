@@ -24,6 +24,11 @@
 - `PORT=8080`
 - `JWT_SECRET='any-random-string'`
 - `CLIENT_URL=http://localhost:3000`
+- `EMAIL_FROM=''`
+- `EMAIL_HOST=smtp.gmail.com`
+- `EMAIL_PORT=587`
+- `EMAIL_USER=''`
+- `EMAIL_PASS=''`
 
 ```bash
 npm install
