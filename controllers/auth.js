@@ -112,9 +112,34 @@ exports.forgotPassword = (req, res) => {
             text: `Please use the following link to reset your password: ${
                 process.env.CLIENT_URL
             }/reset-password/${token}`,
-            html: `<p>Please use the following link to reset your password:</p> <p>${
-                process.env.CLIENT_URL
-            }/reset-password/${token}</p>`
+            html: `
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px; background-color: #f9f9f9;">
+                <h2 style="text-align: center; color: #333;">Password Reset Request</h2>
+                <p style="font-size: 16px; color: #555;">
+                    Hello, 
+                </p>
+                <p style="font-size: 16px; color: #555;">
+                    You have requested to reset your password. Please click the button below to reset your password. This link will expire in 30 minutes.
+                </p>
+                <div style="text-align: center; margin: 20px 0;">
+                    <a href="${
+                        process.env.CLIENT_URL
+                    }/reset-password/${token}" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: #fff; background-color: #007BFF; text-decoration: none; border-radius: 5px;">
+                        Reset Password
+                    </a>
+                </div>
+                <p style="font-size: 14px; color: #999;">
+                    If you did not request this, please ignore this email. Your password will remain unchanged.
+                </p>
+                <p style="font-size: 14px; color: #555;">
+                    Thank you,<br />
+                    <strong>SocialWorld Team</strong>
+                </p>
+                <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;" />
+                <p style="font-size: 12px; color: #999; text-align: center;">
+                    © ${new Date().getFullYear()} SocialWorld. All rights reserved.
+                </p>
+            </div>`
         };
 
         return user.updateOne({ resetPasswordLink: token }, (err, success) => {
