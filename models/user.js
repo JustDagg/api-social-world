@@ -56,7 +56,11 @@ const userSchema = new mongoose.Schema({
         type: String,
         trim: true
     },
-    workPlace: {
+    city: {
+        type: String,
+        trim: true
+    },
+    hometown: {
         type: String,
         trim: true
     },
