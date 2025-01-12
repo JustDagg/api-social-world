@@ -80,6 +80,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         trim: true
     },
+    hobby: {
+        type: String,
+        trim: true
+    },
     birthYear: {
         type: Number,
         min: 1900

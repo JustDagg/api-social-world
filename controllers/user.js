@@ -9,7 +9,7 @@ exports.userById = (req, res, next, id) => {
     User.findById(id)
         .populate('following', '_id name')
         .populate('followers', '_id name')
-        .select('name email sex nickname city hometown socialNetworkLink university major specialization birthYear created updated about following followers')
+        .select('name email sex nickname city hometown socialNetworkLink university major specialization hobby birthYear created updated about following followers')
         .exec((err, user) => {
             if (err || !user) {
                 return res.status(400).json({
@@ -41,7 +41,7 @@ exports.allUsers = (req, res) => {
         }
         return res.json(users);
     })
-        .select("name email sex nickname city hometown socialNetworkLink university major specialization birthYear updated created about following followers notificationToken")
+        .select("name email sex nickname city hometown socialNetworkLink university major specialization hobby birthYear updated created about following followers notificationToken")
         .populate('following', '_id name email')
         .populate('followers', '_id name email');
 };
