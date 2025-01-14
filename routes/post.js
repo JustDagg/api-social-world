@@ -1,7 +1,7 @@
 const express = require('express')
 
 const { requireSignin } = require('../controllers/auth');
-const { getPosts, createPost, postsByUser, postById, isPoster, deletePost, updatePost, photo, singlePost, like, unlike, comment, uncomment, countPosts, createPostRn, getPostPhotoRn, getAllPostsRn, updatePostRn } = require('../controllers/post')
+const { getPosts, createPost, postsByUser, postById, isPoster, deletePost, updatePost, photo, singlePost, like, unlike, comment, uncomment, countPosts, createPostRn, getPostPhotoRn, getAllPostsRn, updatePostRn, updateRestrictedPhrases, getRestrictedPhrases } = require('../controllers/post')
 const { userById } = require('../controllers/user');
 const { createPostValidator } = require('../validator/index');
 
@@ -24,6 +24,11 @@ router.put("/post/unlike", requireSignin, unlike);
 
 // /post/comment
 router.put("/post/comment", requireSignin, comment);
+
+// /post/comment/restricted
+router.put("/post/comment/restricted", requireSignin, updateRestrictedPhrases);
+
+router.get('/post/comment/restricted', requireSignin, getRestrictedPhrases);
 
 // /post/uncomment
 router.put("/post/uncomment", requireSignin, uncomment);

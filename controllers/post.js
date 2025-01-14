@@ -279,21 +279,77 @@ exports.unlike = (req, res) => {
 
 // comment
 exports.comment = (req, res) => {
-    //comment, postId and userId comes from frontend
     let comment = req.body.comment;
-    comment.postedBy = req.body.userId
-    Post.findByIdAndUpdate(req.body.postId, { $push: { comments: comment } }, { new: true })
-        .populate('comments.postedBy', '_id name')
-        .populate('postedBy', '_id name')
-        .exec((err, result) => {
+    comment.postedBy = req.body.userId;
+
+    Post.findById(req.body.postId, (err, post) => {
+        if (err || !post) {
+            return res.status(400).json({ error: "Bài đăng không tồn tại." });
+        }
+
+        const restrictedPhrases = post.restrictedPhrases || [];
+        const containsRestrictedPhrase = restrictedPhrases.some(phrase =>
+            comment.text.toLowerCase().includes(phrase.toLowerCase())
+        );
+
+        if (containsRestrictedPhrase) {
+            return res.status(400).json({
+                error: "Bình luận của bạn chứa các cụm từ bị hạn chế."
+            });
+        }
+
+        // Thêm bình luận nếu không vi phạm
+        post.comments.push(comment);
+
+        post.save((err, result) => {
             if (err) {
-                return res.status(400).json({
-                    error: err
-                })
-            } else {
-                res.json(result);
+                return res.status(400).json({ error: "Không thể thêm bình luận." });
             }
+            res.json(result);
         });
+    });
+};
+
+// updateRestrictedPhrases
+exports.updateRestrictedPhrases = (req, res) => {
+    const { restrictedPhrases } = req.body;
+    const userId = req.auth._id;
+
+    Post.find({ postedBy: userId }, (err, posts) => {
+        if (err || !posts || posts.length === 0) {
+            return res.status(400).json({ error: "Không có bài đăng nào của người dùng." });
+        }
+
+        posts.forEach((post) => {
+            post.restrictedPhrases = restrictedPhrases;
+            post.save((err, updatedPost) => {
+                if (err) {
+                    return res.status(400).json({ error: "Không thể cập nhật danh sách từ hạn chế." });
+                }
+            });
+        });
+
+        res.json({
+            message: "Danh sách từ hạn chế đã được cập nhật thành công cho tất cả bài đăng.",
+            restrictedPhrases: restrictedPhrases,
+        });
+    });
+};
+
+exports.getRestrictedPhrases = (req, res) => {
+    const userId = req.auth._id; // Lấy userId từ thông tin auth
+
+    // Tìm tất cả bài đăng của người dùng
+    Post.find({ postedBy: userId }, (err, posts) => {
+        if (err || !posts) {
+            return res.status(400).json({ error: "Không tìm thấy bài đăng nào của người dùng." });
+        }
+
+        // Lấy các từ hạn chế từ bài đăng đầu tiên của người dùng
+        const restrictedPhrases = posts.length > 0 ? posts[0].restrictedPhrases : [];
+
+        res.json({ restrictedPhrases });
+    });
 };
 
 // uncomment

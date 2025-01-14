@@ -36,7 +36,8 @@ const postSchema = new mongoose.Schema({
         text: String,
         created: { type: Date, default: Date.now },
         postedBy: { type: ObjectId, ref: "User" }
-    }]
+    }],
+    restrictedPhrases: [String]
 });
 
 module.exports = mongoose.model("Post", postSchema);
