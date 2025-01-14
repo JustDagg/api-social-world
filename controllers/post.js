@@ -298,7 +298,6 @@ exports.comment = (req, res) => {
             });
         }
 
-        // Thêm bình luận nếu không vi phạm
         post.comments.push(comment);
 
         post.save((err, result) => {
@@ -336,18 +335,15 @@ exports.updateRestrictedPhrases = (req, res) => {
     });
 };
 
+// getRestrictedPhrases
 exports.getRestrictedPhrases = (req, res) => {
-    const userId = req.auth._id; // Lấy userId từ thông tin auth
+    const userId = req.auth._id;
 
-    // Tìm tất cả bài đăng của người dùng
     Post.find({ postedBy: userId }, (err, posts) => {
         if (err || !posts) {
             return res.status(400).json({ error: "Không tìm thấy bài đăng nào của người dùng." });
         }
-
-        // Lấy các từ hạn chế từ bài đăng đầu tiên của người dùng
         const restrictedPhrases = posts.length > 0 ? posts[0].restrictedPhrases : [];
-
         res.json({ restrictedPhrases });
     });
 };

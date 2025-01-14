@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { getNotes, getNoteByUserId, createNote, updateNote, deleteNote, noteById } = require('../controllers/note');
 const { requireSignin } = require('../controllers/auth'); 
+
+const { getNotes, getNoteByUserId, createNote, updateNote, deleteNote, noteById } = require('../controllers/note');
 
 // /notes
 router.get('/notes', requireSignin, getNotes);

@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const { requireSignin } = require('../controllers/auth');
+
 const { getDiscussionPosts, createDiscussionPost, updateDiscussionPost, deleteDiscussionPost, discussionById, likeDiscussionPost, unlikeDiscussionPost, getSubjects, getUniversities } = require('../controllers/discussion');
-const { requireSignin } = require('../controllers/auth'); // Assuming you have this middleware
 
 // /discussion
 router.get('/discussion', getDiscussionPosts);

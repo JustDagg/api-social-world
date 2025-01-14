@@ -1,11 +1,10 @@
 const express = require('express')
-
 const { requireSignin } = require('../controllers/auth');
-const { getPosts, createPost, postsByUser, postById, isPoster, deletePost, updatePost, photo, singlePost, like, unlike, comment, uncomment, countPosts, createPostRn, getPostPhotoRn, getAllPostsRn, updatePostRn, updateRestrictedPhrases, getRestrictedPhrases } = require('../controllers/post')
 const { userById } = require('../controllers/user');
 const { createPostValidator } = require('../validator/index');
-
 const router = express.Router();
+
+const { getPosts, createPost, postsByUser, postById, isPoster, deletePost, updatePost, photo, singlePost, like, unlike, comment, uncomment, countPosts, createPostRn, getPostPhotoRn, getAllPostsRn, updatePostRn, updateRestrictedPhrases, getRestrictedPhrases } = require('../controllers/post')
 
 // /posts
 router.get('/posts', getPosts);
@@ -28,6 +27,7 @@ router.put("/post/comment", requireSignin, comment);
 // /post/comment/restricted
 router.put("/post/comment/restricted", requireSignin, updateRestrictedPhrases);
 
+// /post/comment/restricted
 router.get('/post/comment/restricted', requireSignin, getRestrictedPhrases);
 
 // /post/uncomment

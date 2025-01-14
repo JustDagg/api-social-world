@@ -1,10 +1,8 @@
 const express = require('express')
+const { requireSignin } = require('../controllers/auth');
+const router = express.Router();
 
 const { userById, allUsers, getUser, updateUser, deleteUser, userPhoto, addFollowing, addFollower, removeFollowing, removeFollower, findPeople, updateUserRn, searchUserByName, getUniversities, createNote } = require('../controllers/user');
-const { requireSignin } = require('../controllers/auth');
-
-
-const router = express.Router();
 
 // /user/follow
 router.put('/user/follow', requireSignin, addFollowing, addFollower);
