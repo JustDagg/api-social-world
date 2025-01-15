@@ -80,7 +80,27 @@ const userSchema = new mongoose.Schema({
         type: String,
         trim: true
     },
+    studyStatus: {
+        type: String,
+        enum: ['0', '1'],
+    },
     hobby: {
+        type: String,
+        trim: true
+    },
+    ethnicity: {
+        type: String,
+        trim: true
+    },
+    religion: {
+        type: String,
+        trim: true
+    },
+    mobile: {
+        type: String,
+        trim: true
+    },
+    nationality: {
         type: String,
         trim: true
     },
@@ -123,7 +143,5 @@ userSchema.methods = {
         }
     }
 }
-
-
 
 module.exports = mongoose.model("User", userSchema);

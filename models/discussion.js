@@ -37,5 +37,4 @@ const discussionSchema = new mongoose.Schema({
     likes: [{ type: ObjectId, ref: "User" }],
 });
 
-// Export the Discussion model
 module.exports = mongoose.model("Discussion", discussionSchema);

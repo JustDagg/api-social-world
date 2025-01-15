@@ -24,7 +24,7 @@ mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log('db connected'));
 
 mongoose.connection.on('error', err => {
-    console.log(`DB Error: ${err.message}`); // Log database connection errors
+    console.log(`DB Error: ${err.message}`);
 });
 
 // postRoutes
