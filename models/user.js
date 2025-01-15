@@ -84,6 +84,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         enum: ['0', '1'],
     },
+    certificate: {
+        type: String,
+        trim: true
+    },
     hobby: {
         type: String,
         trim: true
