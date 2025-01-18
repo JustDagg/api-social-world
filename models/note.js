@@ -9,7 +9,7 @@ const noteSchema = new mongoose.Schema({
     created: {
         type: Date,
         default: Date.now,
-        expires: 18000 // 5 hours in seconds (5 * 60 * 60 = 18000 seconds)
+        expires: 86400 // 24 hours in seconds (24 * 60 * 60 = 86400 seconds)
     },
     postedBy: {
         type: ObjectId,
